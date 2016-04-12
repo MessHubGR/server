@@ -10,7 +10,12 @@
                 <div class="panel-body">
                     <div class="form-group form-map">
                         <div class="col-md-3 control-label"></div>
-                        <div class="col-md-7 form-map"><p class="bg-info" style="padding: 7px; text-align: center;">Drag the marker in the map below to change the coordinates of the new hub.</p><div id="create_map"></div></div>
+                        <div class="col-md-7 form-map">
+                            <div class="alert alert-info" style="text-align: center;">
+                                Drag the marker in the map below to change the coordinates of the new hub.
+                            </div>
+                            <div id="create_map"></div>
+                        </div>
                     </div>
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('hub.store') }}">
                         {!! csrf_field() !!}

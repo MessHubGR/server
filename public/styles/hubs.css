@@ -1,0 +1,25 @@
+#map {
+	height:750px;
+	width: 100%;
+}
+
+#create_map {
+	height:400px;
+	width: 100%;
+}
+
+td, th {
+	text-align:center;
+}
+
+.valign > td, th {
+	vertical-align: middle !important;
+}
+
+.rightpadding {
+	padding-right: 5px;
+}
+
+.form-map {
+	padding-bottom: 15px;
+}

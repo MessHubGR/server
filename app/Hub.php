@@ -12,6 +12,10 @@ class Hub extends Model
      * @var array
      */
     protected $fillable = [
-        'key', 'latitude', 'longitude', 'capacity', 'active', 'battery'
+        'key', 'latitude', 'longitude', 'capacity', 'active', 'battery', 'lockdown'
     ];
+
+    public function log(){
+    	return null;
+    }
 }

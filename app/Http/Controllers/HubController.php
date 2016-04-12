@@ -9,6 +9,17 @@ use App\Http\Requests;
 
 class HubController extends Controller
 {
+
+    /**
+     * Instantiate a new HubController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('permission:manage.hubs', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of all hubs.
      *
@@ -17,7 +28,7 @@ class HubController extends Controller
     public function index()
     {
         $hubs = Hub::all();
-        return view('hubs.index')->with(compact('hubs'));
+        return view('hub.index')->with(compact('hubs'));
     }
 
     /**
@@ -27,7 +38,7 @@ class HubController extends Controller
      */
     public function create()
     {
-        return view('hubs.create');
+        return view('hub.create');
     }
 
     /**
@@ -42,7 +53,8 @@ class HubController extends Controller
             'latitude' => 'required',
             'longitude' => 'required'
         ]);
-        $hub_key = str_random(32);
+        
+        $hub_key = str_random(16);
         Hub::create([
             "key" => $hub_key,
             "latitude" => $request->input('latitude'),
@@ -65,7 +77,8 @@ class HubController extends Controller
      */
     public function show($id)
     {
-        //
+        $hub = Hub::findOrFail($id);
+        return view('hub.show')->with(compact('hub'));
     }
 
     /**
@@ -76,7 +89,8 @@ class HubController extends Controller
      */
     public function edit($id)
     {
-        //
+        $hub = Hub::findOrFail($id);
+        return view('hub.edit')->with(compact('hub'));
     }
 
     /**
@@ -88,7 +102,21 @@ class HubController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $hub = Hub::findOrFail($id);
+
+        $this->validate($request, [
+            'latitude' => 'required_unless:key,regenerate',
+            'longitude' => 'required_unless:key,regenerate'
+        ]);
+        if ($request->input('key') != null) {
+            $hub->key = str_random(16);
+        } else {
+            $hub->latitude = $request->input('latitude');
+            $hub->longitude = $request->input('longitude');
+        }
+        $hub->save();
+        
+        return redirect(route('hub.show', $id));
     }
 
     /**
@@ -99,6 +127,9 @@ class HubController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $hub = Hub::findOrFail($id);
+        $hub->active = !$hub->active;
+        $hub->save();
+        return redirect(route('hub.show', $id));
     }
 }

@@ -3,17 +3,16 @@
 	width: 100%;
 }
 
-#create_map {
-	height:400px;
-	width: 100%;
-}
-
 td, th {
 	text-align:center;
 }
 
 .valign > td, th {
 	vertical-align: middle !important;
+}
+
+.topmargin {
+	margin-top: 7px;
 }
 
 .rightpadding {

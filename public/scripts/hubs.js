@@ -35,10 +35,10 @@ function initialization (){
 				var element = $("tr").filter('[data-hub="' + marker.hub + '"]');
 				$("tr").removeClass('active');
 				element.addClass('active');
-				 $("html, body").animate({ scrollTop: element.position().top }, "slow");
 			});
 			marker.addListener('dblclick', function() {
 				$("tr").removeClass('active');
+				window.open('/hub/' + marker.hub);
 			});
 			hubs.push(marker);
 		});

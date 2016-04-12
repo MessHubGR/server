@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,9 +12,11 @@ class Hub extends Model
      * @var array
      */
     protected $fillable = [
-        'key', 'latitude', 'longitude', 'capacity', 'active', 'battery', 'lockdown'
+        'key', 'latitude', 'longitude', 'capacity', 'active', 'battery', 'lockdown', 'deployed_at'
     ];
 
+    protected $dates = ['created_at', 'updated_at', 'deployed_at'];
+    
     public function log(){
     	return null;
     }

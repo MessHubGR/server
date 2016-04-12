@@ -23,6 +23,7 @@ class CreateHubsTable extends Migration
             $table->boolean('active')->default(false);
 
             $table->integer('battery')->nullable();
+            $table->timestamp('deployed_at')->nullable();
             $table->timestamps();
         });
     }

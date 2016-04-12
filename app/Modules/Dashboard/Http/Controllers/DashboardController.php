@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Modules\Dashboard\Http\Controllers;
 
 use App\Http\Requests;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -24,6 +25,6 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('dashboard::home');
     }
 }

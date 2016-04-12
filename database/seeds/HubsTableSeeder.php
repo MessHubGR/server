@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Hub;
+use App\Models\Hub;
 
 class HubsTableSeeder extends Seeder
 {

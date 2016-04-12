@@ -154,12 +154,13 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
 
         /**
          * Third Party Service Providers...
          */
         Bican\Roles\RolesServiceProvider::class,
+        Caffeinated\Modules\ModulesServiceProvider::class,
+        Dingo\Api\Provider\LaravelServiceProvider::class
     ],
 
     /*
@@ -205,7 +206,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        /**
+         * Third Party Aliases...
+         */
+        'Module' => Caffeinated\Modules\Facades\Module::class,
     ],
 
 ];

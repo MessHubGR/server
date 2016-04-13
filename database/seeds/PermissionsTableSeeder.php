@@ -27,7 +27,7 @@ class PermissionsTableSeeder extends Seeder
 		$unlockHubPermission = Permission::create([
 		    'name' => 'Unlock hubs',
 		    'slug' => 'unlock.hubs',
-		    'description' => 'Allows said user to unlock all hubs.'
+		    'description' => 'Allows said user to unlock the tray in any hub.'
 		]);
 
 		$manageHubsPermission = Permission::create([
@@ -39,19 +39,19 @@ class PermissionsTableSeeder extends Seeder
 		$viewRefugeesPermission = Permission::create([
 		    'name' => 'View refugees',
 		    'slug' => 'view.refugees',
-		    'description' => 'Allows said user to view all refugees.'
+		    'description' => 'Allows said user to view all refugees in any log.'
 		]);
 
 		$trackRefugeesPermission = Permission::create([
 		    'name' => 'Track refugees',
 		    'slug' => 'track.refugees',
-		    'description' => 'Allows said user to track all refugees.'
+		    'description' => 'Allows said user to track all refugees\' locations and notify the authorities.'
 		]);
 
 		$manageRefugeesPermission = Permission::create([
 		    'name' => 'Manage refugees',
 		    'slug' => 'manage.refugees',
-		    'description' => 'Allows said user to manage refugees.'
+		    'description' => 'Allows said user to manage refugees in the database.'
 		]);
 
 		$manageUsersPermission = Permission::create([

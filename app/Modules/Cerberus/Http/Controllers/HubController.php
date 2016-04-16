@@ -12,6 +12,18 @@ use App\Http\Requests;
 class HubController extends ApiController
 {
     /**
+     * Instantiate a new HubController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('api.auth', ['except' => [
+            'index'
+        ]]);
+    }
+
+    /**
      * Display a listing of all hubs.
      *
      * @return \Illuminate\Http\Response
@@ -30,6 +42,11 @@ class HubController extends ApiController
      */
     public function deploy(Request $request)
     {
+        $user = app('Dingo\Api\Auth\Auth')->user();
+        if (!($user->hasPermission('manage.hubs'))) {
+            throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException(null, 'You do not have the required manage.hubs permission.');
+        }
+
         $rules = [
             'key' => ['required', 'size:16', 'string'],
             'capacity' => ['required', 'integer', 'min:1']
@@ -41,7 +58,11 @@ class HubController extends ApiController
             throw new StoreResourceFailedException('Could not deploy hub.', $validator->errors());
         }
 
-        $hub = Hub::where('key', $request->input('key'))->firstOrFail();
+        $hub = Hub::where('key', $request->input('key'))->first();
+        if ($hub == null) {
+            throw new StoreResourceFailedException('Could not deploy hub because an invalid key was entered.', $validator->errors());
+        }
+
         $hub->capacity = $request->input('capacity');
         $hub->active = true;
         $hub->deployed_at = Carbon::now();

@@ -160,7 +160,8 @@ return [
          */
         Bican\Roles\RolesServiceProvider::class,
         Caffeinated\Modules\ModulesServiceProvider::class,
-        Dingo\Api\Provider\LaravelServiceProvider::class
+        Dingo\Api\Provider\LaravelServiceProvider::class,
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
     ],
 
     /*
@@ -210,6 +211,8 @@ return [
          * Third Party Aliases...
          */
         'Module' => Caffeinated\Modules\Facades\Module::class,
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
     ],
 
 ];

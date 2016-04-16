@@ -29,7 +29,8 @@
                         <thead>
                           <tr>
                             <th>Hub ID</th>
-                            <th>Meals Status</th>
+                            <th>Meals</th>
+                            <th>Drinks</th>
                             <th>Active</th>
                             <th>Battery</th>
                             <th></th>
@@ -44,10 +45,11 @@
                             @foreach ($hubs as $hub)
                                 <tr class="valign" data-hub="{{ $hub->id }}">
                                     <td >{{ $hub->id }}</td>
-                                    @if ($hub->capacity == null)
-                                        <td><i>Awaiting deployment</i></td>
+                                    @if (($hub->capacity_meals == null)||($hub->capacity_drinks == null))
+                                        <td colspan="2"><i>Awaiting deployment</i></td>
                                     @else
-                                        <td>{{ $hub->capacity }} / {{ $hub->capacity }}</td>
+                                        <td>{{ (integer)$hub->data('meals_left') }} / {{ $hub->capacity_meals }}</td>
+                                        <td>{{ (integer)$hub->data('drinks_left') }} / {{ $hub->capacity_drinks }}</td>
                                     @endif
                                     @if ($hub->active)
                                         <td>True</td>

@@ -35,7 +35,7 @@ class HubController extends ApiController
     }
 
     /**
-     * Store a newly created hub in storage.
+     * Deploy a hub.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -49,10 +49,11 @@ class HubController extends ApiController
 
         $rules = [
             'key' => ['required', 'size:16', 'string'],
-            'capacity' => ['required', 'integer', 'min:1']
+            'capacity_meals' => ['required', 'integer', 'min:1'],
+            'capacity_drinks' => ['required', 'integer', 'min:1']
         ];
 
-        $payload = $request->only('key', 'capacity');
+        $payload = $request->only('key', 'capacity_meals', 'capacity_drinks');
         $validator = app('validator')->make($payload, $rules);
         if ($validator->fails()) {
             throw new StoreResourceFailedException('Could not deploy hub.', $validator->errors());
@@ -63,7 +64,8 @@ class HubController extends ApiController
             throw new StoreResourceFailedException('Could not deploy hub because an invalid key was entered.', $validator->errors());
         }
 
-        $hub->capacity = $request->input('capacity');
+        $hub->capacity_meals = (integer)$request->input('capacity_meals');
+        $hub->capacity_drinks = (integer)$request->input('capacity_drinks');
         $hub->active = true;
         $hub->deployed_at = Carbon::now();
         $hub->save();

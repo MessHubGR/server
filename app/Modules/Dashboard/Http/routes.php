@@ -1,5 +1,4 @@
 <?php
-
 Route::group(['middleware' => ['web']], function () {
 	Route::get('login', 'Auth\AuthController@showLoginForm')->name('auth.login');;
 	Route::post('login', 'Auth\AuthController@login');
@@ -10,6 +9,6 @@ Route::group(['middleware' => ['web']], function () {
 
 		Route::resource('/hubs', 'HubController');
 
-		Route::get('/refugees', 'RefugeeController@index')->name('refugees.index');
+		Route::resource('/refugees', 'RefugeeController');
 	});
 });

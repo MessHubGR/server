@@ -20,14 +20,6 @@
                                         <td class="bg-info">{{ $hub->id }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Meals Status</th>
-                                        @if ($hub->capacity == null)
-                                            <td class="bg-warning"><i>Awaiting deployment</i></td>
-                                        @else
-                                            <td>{{ $hub->capacity }} / {{ $hub->capacity }}</td>
-                                        @endif
-                                    </tr>
-                                    <tr>
                                         <th>Active</th>
                                         @if ($hub->active)
                                             <td class="bg-success">True</td>
@@ -35,6 +27,21 @@
                                             <td class="bg-danger">False</td>
                                         @endif
                                     </tr>
+                                        @if (($hub->capacity_meals == null)||($hub->capacity_drinks == null))
+                                            <tr>
+                                                <th>Status</th>
+                                                <td class="bg-warning"><i>Awaiting deployment</i></td>
+                                            </tr>
+                                        @else
+                                            <tr>
+                                                <th>Meals</th>
+                                                <td>{{ (integer)$hub->data('meals_left') }} / {{ $hub->capacity_meals }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Drinks</th>
+                                                <td>{{ (integer)$hub->data('drinks_left') }} / {{ $hub->capacity_drinks }}</td>
+                                            </tr>
+                                        @endif
                                     <tr>
                                         <th>Battery</th>
                                         @if ($hub->battery == null)
@@ -62,7 +69,7 @@
                                             <th>Key</th>
                                             <td class="bg-danger">
                                                 {{ $hub->key }}
-                                                @if (!($hub->active))
+                                                @if (!($hub->active) && (($hub->capacity_meals == null)||($hub->capacity_drinks == null)))
                                                 <button type="submit" class="close " aria-label="Close" href="{{ route('hubs.create') }}"><span aria-hidden="true"><i class="fa fa-refresh text-danger" aria-hidden="true"></i></button>
                                                 @endif
                                             </td>
@@ -118,6 +125,14 @@
                                 <tr>
                                     <td colspan="6" style="text-align: center;"> No activity recorded!</td>
                                 </tr>
+                            @else
+                                @foreach ($hub->log() as $log)
+                                <tr>
+                                    <td>{{ $log->user_id }}</td>
+                                    <td>{{ ucfirst($log->type) }}</td>
+                                    <td>{{ $log->created_at->format('jS M Y - Hi\z') }}</td>
+                                </tr>
+                                @endforeach
                             @endif
                         </tbody>
                     </table>

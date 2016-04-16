@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Hub extends Model
@@ -12,7 +13,7 @@ class Hub extends Model
      * @var array
      */
     protected $fillable = [
-        'key', 'latitude', 'longitude', 'capacity', 'active', 'battery', 'lockdown', 'deployed_at'
+        'key', 'latitude', 'longitude', 'capacity_meals', 'capacity_drinks','active', 'battery', 'lockdown', 'deployed_at'
     ];
 
     protected $dates = ['created_at', 'updated_at', 'deployed_at'];
@@ -34,7 +35,8 @@ class Hub extends Model
         'key'       => 'string',
         'latitude'  => 'double',
         'longitude' => 'double',
-        'capacity'  => 'integer',
+        'capacity_meals'  => 'integer',
+        'capacity_drinks'  => 'integer',
         'active'    => 'boolean',
         'battery'   => 'integer',
         'lockdown'  => 'boolean'
@@ -46,5 +48,34 @@ class Hub extends Model
     public function log()
     {
         return $this->actions()->orderBy('created_at', 'desc')->limit(50)->get();
+    }
+
+    /**
+     * Get data for this hub.
+     */
+    public function data(string $key)
+    {
+        $data = DB::table('hub_info')->where('hub_id', $this->id)->where('key', $key)->first();
+        if ($data == null) return null;
+        return $data->value;
+    }
+
+    /**
+     * Set data for this hub.
+     */
+    public function setData(string $key, string $value)
+    {
+        if ($this->data($key) == null) {
+            return DB::table('hub_info')->insert([
+                'hub_id' => $this->id,
+                'key' => $key,
+                'value' => $value
+            ]);
+        } else {
+            return DB::table('hub_info')
+                ->where('hub_id', $this->id)
+                ->where('key', $key)
+                ->update(['value' => $value]);
+        }
     }
 }

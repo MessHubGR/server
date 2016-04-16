@@ -19,7 +19,9 @@ class CreateHubsTable extends Migration
             $table->double('latitude', 15, 8);
             $table->double('longitude', 15, 8);
 
-            $table->integer('capacity')->nullable();
+            $table->integer('capacity_meals')->nullable();
+            $table->integer('capacity_drinks')->nullable();
+
             $table->boolean('active')->default(false);
 
             $table->integer('battery')->nullable();

@@ -24,4 +24,27 @@ class Hub extends Model
     {
         return $this->hasMany('App\Models\Action');
     }
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'key'       => 'string',
+        'latitude'  => 'double',
+        'longitude' => 'double',
+        'capacity'  => 'integer',
+        'active'    => 'boolean',
+        'battery'   => 'integer',
+        'lockdown'  => 'boolean'
+    ];
+
+    /**
+     * Get the log for this hub.
+     */
+    public function log()
+    {
+        return $this->actions()->orderBy('created_at', 'desc')->limit(50)->get();
+    }
 }

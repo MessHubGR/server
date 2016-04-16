@@ -114,7 +114,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                            @if ($hub->log() == null)
+                            @if (count($hub->log()) == 0)
                                 <tr>
                                     <td colspan="6" style="text-align: center;"> No activity recorded!</td>
                                 </tr>

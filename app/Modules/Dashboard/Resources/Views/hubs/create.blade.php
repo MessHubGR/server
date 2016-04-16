@@ -73,6 +73,6 @@
 @endsection
 
 @section('scripts')
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD-_lGwwWlTss8YJpOQrtLMx0N5MJnQ3Y&libraries=places&callback=initialization" async defer></script>
     <script src="/scripts/hub.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD-_lGwwWlTss8YJpOQrtLMx0N5MJnQ3Y&libraries=places&callback=initialization" async defer></script>
 @endsection

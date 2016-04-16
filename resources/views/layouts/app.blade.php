@@ -52,8 +52,8 @@
                 <ul class="nav navbar-nav">
                 @if (!Auth::guest())
                     <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li><a href="{{ route('hub.index') }}">Hub Management</a></li>
-                    <li><a href="{{ route('refugee.index') }}">Refugee Management</a></li>
+                    <li><a href="{{ route('hubs.index') }}">Hub Management</a></li>
+                    <li><a href="{{ route('refugees.index') }}">Refugee Management</a></li>
                 @endif
                 </ul>
 

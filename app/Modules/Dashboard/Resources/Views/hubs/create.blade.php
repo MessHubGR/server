@@ -18,7 +18,7 @@
                             <div id="location_map"></div>
                         </div>
                     </div>
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('hub.store') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('hubs.store') }}">
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('latitude') ? ' has-error' : '' }}">
@@ -54,7 +54,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-plus"></i>Register Hub
                                 </button>
-                                <a href="{{ route('hub.index') }}" class="btn btn-danger">
+                                <a href="{{ route('hubs.index') }}" class="btn btn-danger">
                                     Cancel
                                 </a>
                             </div>

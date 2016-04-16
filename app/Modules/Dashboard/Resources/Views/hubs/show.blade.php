@@ -53,7 +53,7 @@
                                     </tr>
                                     @permission('manage.hubs')
                                     @if (!($hub->active))
-                                    <form role="form" method="POST" action="{{ route('hub.update', $hub->id) }}">
+                                    <form role="form" method="POST" action="{{ route('hubs.update', $hub->id) }}">
                                         {!! csrf_field() !!}
                                         <input name="_method" type="hidden" value="PUT">
                                         <input name="key" type="hidden" value="regenerate">
@@ -63,7 +63,7 @@
                                             <td class="bg-danger">
                                                 {{ $hub->key }}
                                                 @if (!($hub->active))
-                                                <button type="submit" class="close " aria-label="Close" href="{{ route('hub.create') }}"><span aria-hidden="true"><i class="fa fa-refresh text-danger" aria-hidden="true"></i></button>
+                                                <button type="submit" class="close " aria-label="Close" href="{{ route('hubs.create') }}"><span aria-hidden="true"><i class="fa fa-refresh text-danger" aria-hidden="true"></i></button>
                                                 @endif
                                             </td>
                                         </tr>
@@ -72,10 +72,10 @@
                                 </tbody>
                             </table>
                             @permission('manage.hubs')
-                                <a href="{{ route('hub.edit', $hub->id) }}" class="btn btn-warning btn-block">
+                                <a href="{{ route('hubs.edit', $hub->id) }}" class="btn btn-warning btn-block">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Hub
                                 </a>
-                                <form role="form" method="POST" action="{{ route('hub.destroy', $hub->id) }}">
+                                <form role="form" method="POST" action="{{ route('hubs.destroy', $hub->id) }}">
                                     <input name="_method" type="hidden" value="DELETE">
                                     {!! csrf_field() !!}
                                     @if ($hub->active)
@@ -89,7 +89,7 @@
                                     @endif
                                 </form>
                             @endpermission
-                            <a href="{{ route('hub.index') }}" class="btn btn-primary btn-block topmargin">
+                            <a href="{{ route('hubs.index') }}" class="btn btn-primary btn-block topmargin">
                                 <i class="fa fa-undo" aria-hidden="true"></i> Back
                             </a>
                         </div>

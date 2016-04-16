@@ -8,8 +8,8 @@ Route::group(['middleware' => ['web']], function () {
 	Route::group(['middleware' => 'auth'], function() {
 		Route::get('/', 'DashboardController@index')->name('dashboard');
 
-		Route::resource('/hub', 'HubController');
+		Route::resource('/hubs', 'HubController');
 
-		Route::get('/refugee', 'RefugeeController@index')->name('refugee.index');
+		Route::get('/refugees', 'RefugeeController@index')->name('refugees.index');
 	});
 });

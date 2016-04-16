@@ -28,7 +28,7 @@ class HubController extends Controller
     public function index()
     {
         $hubs = Hub::all();
-        return view('dashboard::hub.index')->with(compact('hubs'));
+        return view('dashboard::hubs.index')->with(compact('hubs'));
     }
 
     /**
@@ -38,7 +38,7 @@ class HubController extends Controller
      */
     public function create()
     {
-        return view('dashboard::hub.create');
+        return view('dashboard::hubs.create');
     }
 
     /**
@@ -66,7 +66,7 @@ class HubController extends Controller
             'message' => 'Hub registered successfully. Please use the following key to deploy the hub: <b>' . $hub_key . '</b>'
         ];
 
-        return redirect(route('hub.index'))->with(compact('status'));
+        return redirect(route('hubs.index'))->with(compact('status'));
     }
 
     /**
@@ -78,7 +78,7 @@ class HubController extends Controller
     public function show($id)
     {
         $hub = Hub::findOrFail($id);
-        return view('dashboard::hub.show')->with(compact('hub'));
+        return view('dashboard::hubs.show')->with(compact('hub'));
     }
 
     /**
@@ -90,7 +90,7 @@ class HubController extends Controller
     public function edit($id)
     {
         $hub = Hub::findOrFail($id);
-        return view('dashboard::hub.edit')->with(compact('hub'));
+        return view('dashboard::hubs.edit')->with(compact('hub'));
     }
 
     /**
@@ -116,7 +116,7 @@ class HubController extends Controller
         }
         $hub->save();
         
-        return redirect(route('hub.show', $id));
+        return redirect(route('hubs.show', $id));
     }
 
     /**
@@ -130,6 +130,6 @@ class HubController extends Controller
         $hub = Hub::findOrFail($id);
         $hub->active = !$hub->active;
         $hub->save();
-        return redirect(route('hub.show', $id));
+        return redirect(route('hubs.show', $id));
     }
 }

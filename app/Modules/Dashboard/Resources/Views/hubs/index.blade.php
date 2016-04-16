@@ -22,7 +22,7 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Hubs Management <a class="close " aria-label="Close" href="{{ route('hub.create') }}"><span aria-hidden="true"><i class="fa fa-plus text-success" aria-hidden="true"></i></a>
+                    Hubs Management <a class="close " aria-label="Close" href="{{ route('hubs.create') }}"><span aria-hidden="true"><i class="fa fa-plus text-success" aria-hidden="true"></i></a>
                 </div>
                 <div class="panel-body">
                     <table class="table table-bordered table-hover">
@@ -60,7 +60,7 @@
                                         <td>{{ $hub->battery }} %</td>
                                     @endif
                                     <td style="width: 75px; font-size:1.2em;">
-                                        <a class="text-info" href="{{ route('hub.show', $hub->id) }}"><span aria-hidden="true"><i class="fa fa-search" aria-hidden="true"></i></a>
+                                        <a class="text-info" href="{{ route('hubs.show', $hub->id) }}"><span aria-hidden="true"><i class="fa fa-search" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

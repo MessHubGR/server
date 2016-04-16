@@ -9,7 +9,7 @@ function initialization (){
 
 	$.ajax({
 		method: "GET",
-		url: "/api/hub"
+		url: "/api/hubs"
 	})
 	.done(function( json ) {
 		$.each(json, function() {
@@ -38,7 +38,7 @@ function initialization (){
 			});
 			marker.addListener('dblclick', function() {
 				$("tr").removeClass('active');
-				window.open('/hub/' + marker.hub);
+				window.open('/hubs/' + marker.hub);
 			});
 			hubs.push(marker);
 		});

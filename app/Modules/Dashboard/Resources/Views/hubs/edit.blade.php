@@ -18,7 +18,7 @@
                             <div id="location_map"></div>
                         </div>
                     </div>
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('hub.update', $hub->id) }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('hubs.update', $hub->id) }}">
                         {!! csrf_field() !!}
                         <input name="_method" type="hidden" value="PUT">
                         <div class="form-group{{ $errors->has('latitude') ? ' has-error' : '' }}">
@@ -54,7 +54,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-pencil-square-o"></i>Edit Hub
                                 </button>
-                                <a href="{{ route('hub.show', $hub->id) }}" class="btn btn-danger">
+                                <a href="{{ route('hubs.show', $hub->id) }}" class="btn btn-danger">
                                     Cancel
                                 </a>
                             </div>

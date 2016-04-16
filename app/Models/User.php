@@ -41,7 +41,7 @@ class User extends Authenticatable implements HasRoleAndPermissionContract
     /**
      * Get data for this user.
      */
-    public function data(string $key)
+    public function data($key)
     {
         $data = DB::table('user_info')->where('user_id', $this->id)->where('key', $key)->first();
         if ($data == null) return null;
@@ -51,7 +51,7 @@ class User extends Authenticatable implements HasRoleAndPermissionContract
     /**
      * Set data for this user.
      */
-    public function setData(string $key, string $value)
+    public function setData($key, $value)
     {
         if ($this->data($key) == null) {
             return DB::table('user_info')->insert([

@@ -53,7 +53,7 @@ class Hub extends Model
     /**
      * Get data for this hub.
      */
-    public function data(string $key)
+    public function data($key)
     {
         $data = DB::table('hub_info')->where('hub_id', $this->id)->where('key', $key)->first();
         if ($data == null) return null;
@@ -63,7 +63,7 @@ class Hub extends Model
     /**
      * Set data for this hub.
      */
-    public function setData(string $key, string $value)
+    public function setData($key, $value)
     {
         if ($this->data($key) == null) {
             return DB::table('hub_info')->insert([

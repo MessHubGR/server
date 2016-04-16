@@ -27,4 +27,12 @@ class User extends Authenticatable implements HasRoleAndPermissionContract
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the takeaways for this user.
+     */
+    public function actions()
+    {
+        return $this->hasMany('App\Models\Action');
+    }
 }

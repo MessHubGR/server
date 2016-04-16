@@ -16,8 +16,12 @@ class Hub extends Model
     ];
 
     protected $dates = ['created_at', 'updated_at', 'deployed_at'];
-    
-    public function log(){
-    	return null;
+
+    /**
+     * Get the takeaways for this hub.
+     */
+    public function actions()
+    {
+        return $this->hasMany('App\Models\Action');
     }
 }

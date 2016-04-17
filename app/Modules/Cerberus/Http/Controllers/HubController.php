@@ -70,6 +70,6 @@ class HubController extends ApiController
         $hub->deployed_at = Carbon::now();
         $hub->save();
 
-        return $this->response->created();
+        return $this->response->accepted(null, $hub);
     }
 }

@@ -36,6 +36,12 @@ class RefugeeController extends ApiController
             throw new \Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException('Could not find refugee.');
         $hubs = $user->actions()->groupBy('hub_id')->join('hubs','actions.hub_id', '=', 'hubs.id')->select(['hubs.latitude', 'hubs.longitude'])->get();
 
+
+	foreach ($hubs as $hub){
+        	$hub->latitude = (double)$hub->latitude;
+        	$hub->longitude = (double)$hub->longitude;
+	}
+
         return $this->response->array($hubs->toArray());
     }
 }

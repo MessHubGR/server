@@ -66,8 +66,8 @@ class HubController extends ApiController
         }
 
         $rules = [
-            'latitude' => ['required', 'double'],
-            'longitude' => ['required', 'double']
+            'latitude' => ['required'],
+            'longitude' => ['required']
         ];
 
         $payload = $request->only('latitude', 'longitude');

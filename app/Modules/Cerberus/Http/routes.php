@@ -7,7 +7,7 @@ $api->version('v1', function ($api) {
 
 	$api->get('/hubs', 'App\Modules\Cerberus\Http\Controllers\HubController@index');
 	$api->post('/hubs', 'App\Modules\Cerberus\Http\Controllers\HubController@store');
-	$api->get('/hubs/{id}', 'App\Modules\Cerberus\Http\Controllers\HubController@show')->name('api.hub.show');
+	$api->get('/hubs/{id}', 'App\Modules\Cerberus\Http\Controllers\HubController@show');
 	$api->post('/hubs/deploy', 'App\Modules\Cerberus\Http\Controllers\HubController@deploy');
 	//$api->post('/hubs/sitrep', 'App\Modules\Cerberus\Http\Controllers\HubController@sitrep');
 

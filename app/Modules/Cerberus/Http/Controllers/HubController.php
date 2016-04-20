@@ -83,7 +83,7 @@ class HubController extends ApiController
             "longitude" => $request->input('longitude')
         ]);
 
-        return $this->response->created(route('api.hub.show', $hub->id));
+        return $this->response->created(env('APP_URL', '') . '/api/hubs/' . $hub->id);
     }
 
     /**
@@ -122,6 +122,6 @@ class HubController extends ApiController
         $hub->deployed_at = Carbon::now();
         $hub->save();
 
-        return $this->response->accepted(route('api.hub.show', $hub->id), $hub);
+        return $this->response->accepted(env('APP_URL', '') . '/api/hubs/' . $hub->id, $hub);
     }
 }

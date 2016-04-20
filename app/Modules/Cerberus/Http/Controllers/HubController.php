@@ -48,7 +48,7 @@ class HubController extends ApiController
         }
 
         $hub = Hub::findOrFail($id);
-        return $this->response->json($hub);
+        return $this->response->array($hub->toArray());
     }
 
     /**

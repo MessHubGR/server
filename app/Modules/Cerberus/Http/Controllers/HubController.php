@@ -35,6 +35,58 @@ class HubController extends ApiController
     }
 
     /**
+     * Display a hubs.
+     *
+     * @param  integer $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $user = app('Dingo\Api\Auth\Auth')->user();
+        if (!($user->hasPermission('manage.hubs'))) {
+            throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException(null, 'You do not have the required manage.hubs permission.');
+        }
+
+        $hub = Hub::findOrFail($id);
+        return $this->response->item($hub);
+    }
+
+    /**
+     * Store a newly created hub in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+
+        $user = app('Dingo\Api\Auth\Auth')->user();
+        if (!($user->hasPermission('manage.hubs'))) {
+            throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException(null, 'You do not have the required manage.hubs permission.');
+        }
+
+        $rules = [
+            'latitude' => ['required', 'double'],
+            'longitude' => ['required', 'double']
+        ];
+
+        $payload = $request->only('latitude', 'longitude');
+        $validator = app('validator')->make($payload, $rules);
+        if ($validator->fails()) {
+            throw new StoreResourceFailedException('Could not create hub.', $validator->errors());
+        }
+        
+        $hub_key = str_random(16);
+        $hub = Hub::create([
+            "key" => $hub_key,
+            "latitude" => $request->input('latitude'),
+            "longitude" => $request->input('longitude')
+        ]);
+
+        return $this->response->created(route('api.hub.show', $hub->id));
+    }
+
+    /**
      * Deploy a hub.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -70,6 +122,6 @@ class HubController extends ApiController
         $hub->deployed_at = Carbon::now();
         $hub->save();
 
-        return $this->response->accepted(null, $hub);
+        return $this->response->accepted(route('api.hub.show', $hub->id), $hub);
     }
 }
